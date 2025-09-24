@@ -63,10 +63,17 @@ export const authAPI = {
     return response.data;
   },
   
-  register: async (userData) => {
-    const response = await api.post('/register/', userData);
-    return response.data;
-  },
+  register: async ({ username, email, password, passwordConfirm, firstName = "", lastName = "" }) => {
+  const response = await api.post('/register/', {
+    username,
+    email,
+    password,
+    password_confirm: passwordConfirm,
+    first_name: firstName,            
+    last_name: lastName               
+  });
+  return response.data;
+},
   
   getProfile: async () => {
     const response = await api.get('/profile/');
